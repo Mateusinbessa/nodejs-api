@@ -12,7 +12,7 @@ const getProducts = async (req, res) => {
     }
 }
 
-// @desc    Gets Single Product
+// @desc    Gets a Single Product
 // @route   GET /api/products/:id
 const getProduct = async (req, res, id) => {
     try {
