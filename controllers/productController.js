@@ -1,4 +1,4 @@
-const { findAll, findById } = require('../models/productModel')
+const { findAll, findById, create } = require('../models/productModel')
 
 // @desc    Gets All Products
 // @route   GET /api/products
@@ -29,7 +29,25 @@ const getProduct = async (req, res, id) => {
     }
 }
 
+// @desc    Create a Product
+// @route   POST /api/products
+const createProduct = async (req, res) => {
+    try {
+        const product = {
+            name: 'Test Product',
+            description: 'This is my product',
+            price: 100
+        }
+        const newProduct = await create(product)
+        res.writeHead(201, { 'Content-Type': 'application/json' })
+        return res.end(JSON.stringify(newProduct))
+    } catch (error) {
+        console.log(error)
+    }
+}
+
 module.exports = {
     getProducts,
-    getProduct
+    getProduct,
+    createProduct
 }
