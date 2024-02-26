@@ -11,10 +11,11 @@ const server = http.createServer((req, res) => {
         const id = req.url.split('/')[3]
         getProduct(req, res, id)
     }
+    //@route POST /api/products/
     else if (req.url === '/api/products' && req.method === 'POST') {
         createProduct(req, res)
     }
-    //@route GET /*/ = NOT FOUND 
+    //@route GET /* NOT FOUND 
     else {
         res.writeHead(200, { 'Content-Type': 'application/json' });
         res.end(JSON.stringify({ message: 'Route Not Found' }))
