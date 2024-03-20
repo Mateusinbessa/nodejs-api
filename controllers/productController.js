@@ -1,4 +1,4 @@
-const { findAll, findById, create, update } = require('../models/productModel')
+const { findAll, findById, create, update, remove } = require('../models/productModel')
 const { getPostData } = require('../helpers/helpers')
 
 // @desc    Gets All Products
@@ -81,9 +81,28 @@ const updateProduct = async (req, res, id) => {
     }
 }
 
+// @desc    Delete a Single Product
+// @route   DELETE /api/products/:id
+const deleteProduct = async (req, res, id) => {
+    try {
+        const product = await findById(id)
+        if (!product) {
+            res.writeHead(400, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify({ message: 'Product Not Found!' }))
+        } else {
+            await remove(id)
+            res.writeHead(200, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify({ message: `Product ${id} removed!` }))
+        }
+    } catch (error) {
+        console.log(error)
+    }
+}
+
 module.exports = {
     getProducts,
     getProduct,
     createProduct,
-    updateProduct
+    updateProduct,
+    deleteProduct
 }
