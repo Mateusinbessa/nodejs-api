@@ -22,7 +22,10 @@ const getPostData = (req) => {
     })
 }
 
+const CONTENT_TYPE = { 'Content-Type': 'application/json' }
+
 module.exports = {
     writeDataToFile,
-    getPostData
+    getPostData,
+    CONTENT_TYPE,
 }
